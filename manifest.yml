@@ -1,0 +1,6 @@
+---
+applications:
+  - name: team-survey
+    command: team-survey
+services:
+   - elephantsql-prod

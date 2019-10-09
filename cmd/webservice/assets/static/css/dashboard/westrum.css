@@ -1,0 +1,46 @@
+.westrum {
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.westrum .label {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 32.5%;
+    text-align: center;
+}
+
+.westrum .westrum-scale {
+    margin-top: 10px;
+    width: 100%;
+    height: 30px;
+    background: url('/static/img/bg-pattern.png'), linear-gradient(90deg, rgba(255, 61, 61, 1) 0%, rgba(255, 204, 41, 1) 50%, rgba(11, 176, 0, 1) 100%);
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #999;
+}
+
+.westrum .westrum-scale .marker {
+    position: absolute;
+    left: -25px;
+    top: 0;
+    height: 50px;
+    width: 50px;
+    background: white;
+    transform: rotate(45deg);
+    margin: -40px 0 0 -25px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    opacity: .8;
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+.westrum_result {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    text-transform: capitalize;
+    font-size: 28px;
+}

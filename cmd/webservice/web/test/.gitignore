@@ -1,0 +1,5 @@
+node_modules
+cypress/integration/examples
+example.*
+cypress/screenshots/
+cypress/videos/
