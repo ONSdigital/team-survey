@@ -1,0 +1,40 @@
+---
+pages:
+- name: page2
+  title: It is important to evaluate the statements honestly and without over-thinking your answers. Remember, this is anonymous and you won't be tickled for being truthful.
+  elements:
+  - type: matrix
+    name: about_the_team
+    title: Thinking about your team, how frequently do the following statements apply?
+    isRequired: true
+    columns:
+    - value: 1
+      text: Strongly Disagree
+    - value: 2 
+      text: Disagree
+    - value: 3
+      text: Somewhat Disagree
+    - value: 4
+      text: Neither Agree nor Disagree
+    - value: 5
+      text: Somewhat Agree
+    - value: 6
+      text: Agree
+    - value: 7
+      text: Strongly Agree
+    rows:
+    - value: information_actively_sought
+      text: Information is actively sought.
+    - value: messengers_not_punished
+      text: Messengers are not punished when they deliver news of failures or other
+        bad news.
+    - value: responsibilities_shared
+      text: Responsibilities are shared.
+    - value: collaboration_encouraged
+      text: Cross-functional collaboration is encouraged or rewarded.
+    - value: failure_causes_enquiry
+      text: Failure causes enquiry.
+    - value: new_ideas_welcomed
+      text: New ideas are welcomed.
+    - value: failure_treated_as_opportunity
+      text: Failures are treated primarily as opportunities to improve the system.

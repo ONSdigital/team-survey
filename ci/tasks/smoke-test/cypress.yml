@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: cypress/included, tag: 3.4.1 }
+inputs:
+  - name: team-survey
+run:
+  path: team-survey/ci/tasks/smoke-test/cypress.sh
+params:
+        HOST: ((team-survey-url))
+        API_SERVER: ((team-survey-api-url))
+        ADMIN_USERNAME: ((team-survey-admin-username))
+        ADMIN_PASSWORD: ((team-survey-admin-password))
+        CYPRESS_RECORD_KEY: ((cypress-record-key))

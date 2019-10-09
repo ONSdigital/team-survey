@@ -1,0 +1,65 @@
+.pyramid {
+    box-sizing: border-box;
+    clip-path: polygon(50%0%, 0%100%, 100%100%);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    min-height: 400px;
+}
+
+.pyramid .red {
+    background: #cd594b;
+}
+
+.pyramid .amber {
+    background: orange;
+}
+
+.pyramid .green {
+    background: green;
+}
+
+.pyramid,
+.pyramid-historic div {
+    position: relative;
+}
+
+.pyramid div {
+    background: #CCC;
+    border-bottom: 5px solid white;
+    box-sizing: border-box;
+    color: #FFF;
+    font-size: .9em;
+    font-weight: bold;
+    height: 20%;
+    line-height: 550%;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0;
+    width: 100%;
+}
+
+.pyramid div:first-of-type {
+    line-height: 850%;
+}
+
+.pyramid div:nth-child(2),
+.pyramid-historic div div:nth-child(2) {
+    top: 20%;
+}
+
+.pyramid div:nth-child(3),
+.pyramid-historic div div:nth-child(3) {
+    top: 40%;
+}
+
+.pyramid div:nth-child(4),
+.pyramid-historic div div:nth-child(4) {
+    top: 60%;
+}
+
+.pyramid div:nth-child(5),
+.pyramid-historic div div:nth-child(5) {
+    top: 80%;
+}

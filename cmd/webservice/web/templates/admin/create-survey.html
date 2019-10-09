@@ -1,0 +1,65 @@
+{{ define "subnav" }}
+<nav class="sub-navbar">
+    <a href="/admin/survey/" {{if eq "/admin/survey/" .SubSection}} class="active" {{end}}>All Surveys</a>
+    <a href="/admin/survey/new/" {{if eq "/admin/survey/new/" .SubSection}} class="active" {{end}}>Create New</a>
+</nav>
+{{ end }} 
+
+{{ define "content" }}
+<div class="container">
+    <div class="row center-md">
+        <div class="col-xs-12 col-md-6">
+            <div class="page-panel">
+                <form class="pure-form pure-form-aligned" id="create-survey-form">
+                    <legend>Create a New Survey</legend>
+                    <div id="new-form">
+                        <p id="request-error" style="color: red;"></p>
+                        <fieldset>
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="pure-input-1-2" id="survey-name" value="{{.Survey.Name}}"/>
+                        </fieldset>
+                        <fieldset>
+                            <label for="name">Team</label>
+                            <select name="team" class="pure-input-1-2" id="team-name">
+                    </select>
+                        </fieldset>
+                        <fieldset id="team-new-wrapper">
+                            <label for="name"></label>
+                            <input type="text" name="team-new" class="pure-input-1-2" placeholder="New Team Name" id="team-new" />
+                            </select>
+                        </fieldset>
+                        <fieldset style="display: none;">
+                            <label>Components</label>
+                            <label for="westrum">
+                                <input id="westrum" type="checkbox" name="component-westrum" checked="checked" disabled /> Westrum
+                            </label>
+                             <label for="lencioni">
+                                <input id="lencioni" type="checkbox" name="component-lencioni" checked="checked" disabled /> Lencioni
+                            </label>
+                             <label for="metrics">
+                                <input id="metrics" type="checkbox" name="component-metrics" checked="checked" disabled /> Metrics
+                            </label>
+                        </fieldset>
+                        <fieldset>
+                            <button class="pure-button pure-button-primary" action="submit">Create Survey</button>
+                        </fieldset>
+                    </div>
+                    <div id="form-success" style="display: none;">
+                        <p>Your survey has been created, and can be accessed using the following link:</p>
+                        <p><a href="" id="form-success-link">http://</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
+
+{{ define "js" }}
+<script src="/static/js/survey-manager.js"></script>
+{{ end }}
+
+{{ define "css" }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.1/forms-min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.1/buttons-min.css" />
+{{ end }}

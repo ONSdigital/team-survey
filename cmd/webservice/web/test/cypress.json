@@ -1,0 +1,11 @@
+{
+  "env": {
+    "HOST": "http://localhost:8080",
+    "API_SERVER": "http://localhost:8080/api/v1",
+    "TEST_SURVEY_NAME": "example-survey",
+    "TEST_SURVEY_TEAM": "Acme Corporation",
+    "ADMIN_USERNAME": "admin",
+    "ADMIN_PASSWORD": "hello"
+  },
+  "projectId": "om82zm"
+}

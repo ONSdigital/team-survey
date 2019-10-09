@@ -1,0 +1,102 @@
+{{ define "subnav" }}
+<nav class="sub-navbar">
+    <form class="params">
+        <div class="row">
+            <div class="col-xs-4 col-md-12">
+            {{ if not .Team.Name }}
+                <div class="team-picker">
+                    <label for="team">Team</label>
+                    <select name="team" id="team-selector"></select> 
+                </div>
+            {{ end }}
+                <div class="date-pickers">
+                    <label for="dateStart">From</label>
+                    <input name="dateStart" type="date" />
+
+                    <label for="dateEnd">To</label>
+                    <input name="dateEnd" type="date" />
+                </div>
+            </div>
+        </div>
+    </form>
+</nav>
+{{ end }} 
+{{ define "content"}}
+
+<div class="container">
+    <div class="row page-panel top-panel">
+        <div class="col-xs-12">
+            <h2><a href="" id="team-name"></a></h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="metric-panel">
+                <h2>Lencioni</h2>
+                <div class="pyramid">
+                    <div class="results" id="lencioni-results">Results</div>
+                    <div class="accountability" id="lencioni-accountability">Accountability</div>
+                    <div class="commitment" id="lencioni-commitment">Commitment</div>
+                    <div class="conflict" id="lencioni-conflict">Conflict</div>
+                    <div class="trust" id="lencioni-trust">Trust</div>
+                </div>
+                <div class="clear-fix"></div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="metric-panel">
+                        <h2>Westrum</h2>
+                        <span class="westrum_result" data-metric="westrum_result"></span>
+                        <div class="westrum">
+                            <div class="label">Pathological</div>
+                            <div class="label">Bureaucratic</div>
+                            <div class="label">Generative</div>
+                            <div class="westrum-scale">
+                                <div class="marker"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="metric-panel">
+                        <h2>Key Metrics</h2>
+                        <table class="pure-table pure-table-striped" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Lead Time</strong></td>
+                                    <td data-metric="lead_time"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Change Failure</strong></td>
+                                    <td data-metric="change_failure"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>MTTR</strong></td>
+                                    <td data-metric="mttr"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Deploy Frequency</strong></td>
+                                    <td data-metric="deployment_frequency"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }} {{ define "js"}}
+<script src="/static/js/dashboard.js"></script>
+<script>
+    var d = Dashboard.init();
+    d.setTeam('{{or .Team.Name "All"}}');
+</script>
+{{ end }} 
+{{ define "css"}}
+    <link rel="stylesheet" href="/static/css/dashboard/lencioni.css" type="text/css"> 
+    <link rel="stylesheet" href="/static/css/dashboard/westrum.css" type="text/css"> 
+{{ end }}

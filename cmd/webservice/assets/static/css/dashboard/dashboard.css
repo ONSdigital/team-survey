@@ -1,0 +1,185 @@
+/************************************
+*   Page Setup
+************************************/
+
+html,
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+body {
+    background: url('/static/img/bg-pattern.png') #FFF;
+}
+
+.clear-fix {
+    clear: both;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/************************************
+*   Navigation Panel
+************************************/
+
+.navbar,
+.sub-navbar {
+    background: #007bff;
+    border-bottom: 1px solid #004085;
+    box-sizing: border-box;
+    color: #FFF;
+    padding: .6em 2em;
+    width: 100%;
+}
+
+.navbar a,
+.sub-navbar a {
+    color: #FFF;
+    margin-right: 10px;
+    opacity: .5;
+    padding: 0 10px 0 0;
+    text-decoration: none;
+    transition: opacity .1s linear;
+}
+
+.navbar a.active,
+.sub-navbar a.active,
+.navbar a:hover,
+.sub-navbar a:hover {
+    opacity: 1;
+}
+
+.sub-navbar {
+    background: #343a40;
+    border-bottom: #000;
+}
+
+.navbar .logo {
+    float: right;
+    font-size: 18px;
+    line-height: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+.sub-navbar input,
+.sub-navbar select {
+    background: #FFF;
+    border: none;
+    border-radius: 0;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 20px;
+    margin: 10px;
+    outline: none;
+    padding: 0 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 200px;
+}
+
+
+/************************************
+*   Panels
+************************************/
+
+.page-panel,
+.metric-panel {
+    background: #FFF;
+    border: 1px solid #e6e6e6;
+    border-left-width: 5px;
+    box-sizing: border-box;
+    margin: 2em 0;
+    padding: 1.25em;
+}
+
+.metric-panel {
+    width: 100%;
+}
+
+.metric-panel h2 {
+    font-size: 1.4em;
+    line-height: 1em;
+    margin: 0 0 1em 0;
+    padding: 0;
+}
+
+.top-panel {
+    margin-bottom: 0;
+}
+
+.top-panel h2 {
+    font-size: 1.4em;
+    line-height: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+form.logout-form {
+    float: right;
+    margin: 0 20px 0 0;
+}
+
+form.logout-form .button {
+    background: none;
+    border: 1px solid #FFF;
+    border-radius: 2px;
+    color: #FFF;
+    cursor: pointer;
+    font-size: .8em;
+    margin: 0;
+    opacity: .8;
+    padding: 1px 6px;
+    transition: opacity .1s linear;
+}
+
+form.logout-form .button:hover {
+    opacity: 1;
+}
+
+#create-survey-form {
+    text-align: left;
+}
+
+#create-survey-form label {
+    display: inline-block;
+    font-weight: bold;
+    width: 100px;
+}
+
+#create-survey-form button {
+    margin-left: 102px;
+}
+
+.sub-navbar .team-picker,
+.sub-navbar .date-pickers {
+    display: inline;
+}
+
+.profile-image {
+    float: left;
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
+}
+
+.profile-image img {
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+}
