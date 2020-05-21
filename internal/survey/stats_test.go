@@ -3,8 +3,6 @@ package survey_test
 import (
 	"testing"
 
-	// "github.com/onsdigital/team-survey-lambda/internal/survey"
-
 	"github.com/google/go-cmp/cmp"
 	"github.com/onsdigital/team-survey-lambda/internal/survey"
 )
