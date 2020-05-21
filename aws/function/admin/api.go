@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/onsdigital/team-survey-lambda/internal/survey"
+	"github.com/onsdigital/team-survey/internal/survey"
 )
 
 func handleAPIGetSurveyStats(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {

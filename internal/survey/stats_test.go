@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/onsdigital/team-survey-lambda/internal/survey"
+	"github.com/onsdigital/team-survey/internal/survey"
 )
 
 func createNewSurvey() *survey.Survey {

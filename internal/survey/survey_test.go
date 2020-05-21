@@ -3,7 +3,7 @@ package survey_test
 import (
 	"testing"
 
-	"github.com/onsdigital/team-survey-lambda/internal/survey"
+	"github.com/onsdigital/team-survey/internal/survey"
 	"github.com/stretchr/testify/assert"
 )
 

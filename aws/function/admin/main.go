@@ -8,8 +8,8 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/onsdigital/team-survey-lambda/internal/page"
-	"github.com/onsdigital/team-survey-lambda/internal/survey"
+	"github.com/onsdigital/team-survey/internal/page"
+	"github.com/onsdigital/team-survey/internal/survey"
 )
 
 var (

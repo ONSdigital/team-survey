@@ -5,7 +5,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/onsdigital/team-survey-lambda/internal/survey"
+	"github.com/onsdigital/team-survey/internal/survey"
 )
 
 // Path defines the root at which to look for templates.
