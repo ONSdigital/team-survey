@@ -1,4 +1,4 @@
-module github.com/onsdigital/team-survey-lambda
+module github.com/onsdigital/team-survey
 
 go 1.14
 
