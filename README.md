@@ -7,6 +7,8 @@ A serverless survey runner for Cake Experiment inception surveys
 Built with the [serverless framework](https://serverless.com)
 
 ```shell
+npm install
+
 export <AWS_CREDENTIALS>
 make deploy
 ```
