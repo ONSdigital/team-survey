@@ -1,0 +1,103 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Team Questionnaire</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="/static/favicon.ico">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/survey-jquery/1.0.93/survey.min.css">
+  <link rel="stylesheet" href="/static/css/survey.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+  <div class="header">
+    <h1>Anonymous Team Questionnaire</h1>
+  </div>
+  <div id="surveyElement"></div>
+  <div id="surveyResult"></div>
+  <script>window.SurveyName = "{{.Survey.Name}}"; window.SurveyID = "{{.Survey.SurveyID}}"; window.TeamName = "{{.Survey.Team}}"</script>
+  <script src="/static/js/vendor/modernizr-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/survey-jquery/1.0.93/survey.jquery.min.js"></script>
+  <script>
+      // Avoid `console` errors in browsers that lack a console.
+      (function () {
+        var method;
+        var noop = function () { };
+        var methods = [
+          'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+          'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+          'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+          'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+        ];
+        var length = methods.length;
+        var console = (window.console = window.console || {});
+
+        while (length--) {
+          method = methods[length];
+
+          // Only stub undefined methods.
+          if (!console[method]) {
+            console[method] = noop;
+          }
+        }
+      }());
+  </script>
+  <script>
+    window.survey = new Survey.Model({{.SurveyJS }});
+    survey
+      .onComplete
+      .add(function (result) {
+        result.data["team"] = window.TeamName;
+        var scriptUrl = "/{{.Stage}}api/v1/survey/{{.Survey.SurveyID}}";
+        var r = flatten(result.data);
+        r.team = window.TeamName;
+        var bodyJSON = {
+          name: window.SurveyName,
+          surveyID: window.SurveyID,
+          team: window.TeamName,
+          results: [r]
+        };
+
+        (async () => {
+          const rawResponse = await fetch(scriptUrl, {
+            method: 'POST',
+            body: JSON.stringify(bodyJSON)
+          });
+          const content = await rawResponse.json();
+        })();
+      });
+
+    $("#surveyElement").Survey({ model: survey });
+
+    function flatten(obj, prefix, current) {
+      prefix = prefix || []
+      current = current || {}
+
+      // Remember kids, null is also an object!
+      if (typeof (obj) === 'object' && obj !== null) {
+        Object.keys(obj).forEach(key => {
+          this.flatten(obj[key], prefix.concat(key), current)
+        })
+      } else {
+        current[prefix.join('.')] = obj
+      }
+
+      return current
+    }
+  </script>
+</body>
+
+</html>

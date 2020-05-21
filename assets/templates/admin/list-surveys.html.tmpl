@@ -1,0 +1,43 @@
+{{define "subnav"}}
+{{$stage:=.Stage}}
+<nav class="sub-navbar">
+    <a href="/{{$stage}}admin/survey/" class="active">All Surveys</a>
+    <a href="/{{$stage}}admin/survey/new/">Create New</a>
+</nav>
+{{end -}}
+{{define "content"}}
+{{$stage:=.Stage}}
+<div class="container">
+    <div class="row page-panel top-panel">
+        <div class="col-xs-12">            
+            <h2>List of surveys</h2>
+        </div>
+    </div>
+    <div class="col-xs-12 page-panel">
+        <table class="pure-table" width="100%">
+            <thead>
+                <tr>
+                    <th>Survey</th>
+                    <th>Team</th>
+                    <th># Responses</th>
+                    <th>Created</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range $key, $survey := .Surveys }}
+                <tr>
+                    <td><a href="/{{$stage}}survey/{{$survey.SurveyID}}/" target="_blank">{{ $survey.SurveyID }}</a></td>
+                    <td>{{ $survey.Team }}</td>
+                    <td>{{ len $survey.Results }}</td>
+                    <td>{{ $survey.CreatedAt.Format "02 Jan 2006 15:04:05" }}</td>
+                    <td><a href="/{{$stage}}admin/survey/{{$survey.SurveyID}}/">Dashboard</a></td>
+                    <!--<td><a href="/{{$stage}}admin/dashboard/survey/{{$survey.Name}}/delete">Delete</a></td>-->
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{end}}
