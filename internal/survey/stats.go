@@ -217,9 +217,10 @@ func CalculateKeyMetrics(m []StringTotal) StringTotal {
 	highestMetric := m[0]
 
 	if len(m) == 1 {
+		// If there's only one item, then that's going to be the highest!
+		// So just return that
 		total.Text = highestMetric.Text
 		total.Count = highestMetric.Count
-
 		return total
 	}
 

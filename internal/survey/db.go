@@ -1,5 +1,27 @@
 package survey
 
+// Example survey record: (using DynamoDB text view)
+//
+//   {
+//      "Open": true,							# Denotes survey is open or closed
+//      "PK": "SURVEY",							# Fixed text "SURVEY"
+//      "SK": "SURVEY#<SurveyID>",				# Built from "SURVEY#" + <SurveyID>
+//      "SurveyID": "<SurveyID>",				# Unique ID of the survey
+//      "Team": "<Name_of_team_taking_survey"	# Name of the team
+//   }
+//
+// If you need to manually create a new ID, use:
+//
+// package main
+// import (
+// 	 "fmt"
+// 	 "github.com/lithammer/shortuuid/v3"
+// )
+// func main() {
+// 	 u := shortuuid.New()
+// 	 fmt.Println(u)
+// }
+
 import (
 	"context"
 	"os"
