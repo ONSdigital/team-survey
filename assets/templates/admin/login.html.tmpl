@@ -1,0 +1,48 @@
+{{define "subnav"}}
+{{$stage:=.Stage}}
+<nav class="sub-navbar">
+    <a href="/{{$stage}}admin/survey/">All Surveys</a>
+    <a href="/{{$stage}}admin/survey/new/">Create New</a>
+</nav>
+{{end -}}
+{{define "content"}}
+{{$stage:=.Stage}}
+
+<div class="container">
+    <div class="row center-md">
+        <div class="col-xs-12 col-md-6">
+            <div class="page-panel">
+                <form class="pure-form pure-form-aligned" id="create-survey-form">
+                    <legend>Log in</legend>
+                    <div id="new-form">
+                        <p id="request-error" style="color: red;"></p>
+                        <fieldset>
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="pure-input-1-2" id="user-name"/>
+                        </fieldset>
+                        <fieldset>
+                            <label for="password">Password</label>
+                            <input type="password" name="password" class="pure-input-1-2" id="user-password"/>
+                        </fieldset>
+                        <fieldset>
+                            <button class="pure-button pure-button-primary" action="submit">Log in</button>
+                        </fieldset>
+                    </div>
+                    
+
+                    <div id="form-success" style="display: none;">
+                        <p>Your survey has been created, and can be accessed using the following link:</p>
+                        <p><a href="" id="form-success-link">http://</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{end}}
+
+{{ define "css" }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.1/forms-min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.1/buttons-min.css" />
+{{ end }}

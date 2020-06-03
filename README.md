@@ -1,52 +1,24 @@
-# team-survey
+# Cake Team Survey
 
-A team cohesion survey generator/manager
+A serverless survey runner for Cake Experiment inception surveys
 
-## Getting started
+## Deploying
 
-### Environment
+Built with the [serverless framework](https://serverless.com)
 
-| Var           | Default         | Example  | Description                                      |
-| ------------- | --------------- | -------- | ------------------------------------------------ |
-| DISABLE_AUTH  | _&lt;unset&gt;_ | `True`   | Set to `True` to disable authentication checking |
+```shell
+npm install
 
-### Running with vanilla go
-
-```sh
-cd cmd/webservice
-go run ./...
+export <AWS_CREDENTIALS>
+make deploy
 ```
 
-## Question sets
+## Resources created
 
-To run this service, you need to supply the appropriate question sets. They are omitted from this repo as we do not hold the license to publish them. However, if you have your own access to them you can insert them yourself.
+- Survey lambda - main survey runner and end user interaction
+- Admin lambda - back office functions
+- DynamoDB table - holds all persisted data in single-table design
 
-**TODO** Note on what question sets are required and where they are to be inserted
+## Plugins
 
-## Tests
-
-Several sets of tests are included:
-
-### Unit Tests
-
-Use the standard `go` testing command sets, e.g.:
-
-```sh
-go test -v ./...
-```
-
-### UI Testing
-
-Use `cypress` to run the test suite. (**Note**: For these you need to have the `nodejs` based `[npx](https://www.npmjs.com/package/npx)` installed)
-
-The tests can be found under `cmd/webservice/web/test` and run with:
-
-```sh
-npx cypress open
-```
-
-## License
-
-Copyright (c) 2019 Crown Copyright (Office for National Statistics)
-
-Released under MIT license, see [LICENSE](LICENSE) for details.
+- [serverless-s3-sync](https://www.npmjs.com/package/serverless-s3-sync)

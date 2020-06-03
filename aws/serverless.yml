@@ -1,0 +1,207 @@
+service: team-survey
+frameworkVersion: ">=1.28.0 <2.0.0"
+provider:
+  name: aws
+  runtime: go1.x
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-2
+  environment:
+    STAGE: ${self:provider.stage}
+    SURVEY_TABLE_NAME: SurveyTable-${self:provider.stage}
+    S3_ASSETS_BUCKET: "https://${self:custom.bucketName}.s3.${self:provider.region}.amazonaws.com"
+
+plugins:
+  - serverless-s3-sync
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+    - ../assets/survey-components/**
+    - ../assets/templates/**
+
+policies:
+  loggingPolicy: &loggingPolicy
+    - Effect: Allow
+      Action:
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+      Resource:
+        - "Fn::Join":
+            - ":"
+            - - "arn:aws:logs"
+              - Ref: "AWS::Region"
+              - Ref: "AWS::AccountId"
+              - "log-group:/aws/lambda/*:*:*"
+
+custom:
+  bucketName: ${self:service}-assets-${self:provider.stage}
+  s3Sync:
+    - bucketName: ${self:custom.bucketName}
+      bucketPrefix: static/
+      localDir: ../assets/static
+      acl: public-read
+
+functions:
+  # Survey is the survey runner.
+  # It controls display of surveys and recieving responses.
+  survey:
+    handler: bin/survey
+    role: SurveyHandlerRole
+    events:
+      - http:
+          path: survey/{survey}
+          method: get
+          request:
+            parameters:
+              paths:
+                survey: true
+      - http:
+          path: api/v1/survey/{survey}
+          method: post
+          request:
+            parameters:
+              paths:
+                survey: true
+                
+
+  # Admin is the administration block.
+  # It controls back office tasks such as provisioning or closing a survey and
+  # veiwing metrics.
+  admin:
+    handler: bin/admin
+    role: SurveyHandlerRole # TODO own role?
+    events:
+      - http:
+          path: api/v1/survey/{survey}
+          method: get
+          request:
+            parameters:
+              paths:
+                survey: true
+      - http:
+          path: admin/survey
+          method: get
+          # authorizer:
+          #   type: cognito_user_pools
+          #   authorizerId:
+          #     Ref: ApiGatewayAuthorizer
+      - http:
+          path: admin/survey/new
+          method: get
+      - http:
+          path: admin/survey/new
+          method: post
+      - http:
+          path: admin/survey/{survey}
+          method: get
+          request:
+            parameters:
+              paths:
+                survey: true
+      - http:
+          path: api/v1/survey/{survey}/stats
+          method: get
+          request:
+            parameters:
+              paths:
+                survey: true
+      - http:
+          path: admin/login
+          method: get
+          
+
+resources:
+  Resources:
+    SurveyHandlerRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: TeamSurveySurveyHandlerRole
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: DynamoDBPolicy
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - dynamodb:* # TODO lock down permissions
+                  Resource:
+                    - "*"
+          - PolicyName: LoggingPolicy
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - <<: *loggingPolicy
+
+    SurveyTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: SurveyTable-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+
+    StaticAssetsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
+
+
+    UserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: ${self:provider.stage}-${self:service}-user-pool
+        UsernameAttributes:
+          - email
+        AutoVerifiedAttributes:
+          - email
+
+    UserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: ${self:provider.stage}-${self:service}-user-pool-client
+        UserPoolId:
+          Ref: UserPool
+        ExplicitAuthFlows:
+          - ADMIN_NO_SRP_AUTH
+        GenerateSecret: false
+
+    ApiGatewayAuthorizer:
+      DependsOn:
+        - ApiGatewayRestApi
+      Type: AWS::ApiGateway::Authorizer
+      Properties:
+        Name: ${self:provider.stage}-cognito-authorizer
+        IdentitySource: method.request.header.Authorization
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        Type: COGNITO_USER_POOLS
+        ProviderARNs:
+          - Fn::GetAtt: [UserPool, Arn]
+
+  Outputs:
+    UserPoolId:
+      Value:
+        Ref: UserPool
+
+    UserPoolClientId:
+      Value:
+        Ref: UserPoolClient

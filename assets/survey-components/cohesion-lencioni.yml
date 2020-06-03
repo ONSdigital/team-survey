@@ -1,0 +1,68 @@
+---
+pages:
+  - name: page3
+    title:
+      It is important to evaluate the statements honestly and without over-thinking
+      your answers. Remember, this is anonymous and we won't harm your pets if we don't
+      like your answers.
+    elements:
+      - type: matrix
+        name: about_the_team_extended
+        isRequired: true
+        title: Thinking about your team, do you agree with the following statements?
+        columns:
+          - value: 1
+            text: Rarely
+          - value: 2
+            text: Sometimes
+          - value: 3
+            text: Usually
+        rows:
+          - value: unguarded_discussion
+            text: Team members are passionate and unguarded in their discussion of issues.
+          - value: call_out_unproductive_behaviour
+            text: Team members call out one another’s deficiencies or unproductive behaviours.
+          - value: contribute_to_collective_good
+            text:
+              Team members know what their peers are working on and how they contribute
+              to the collective good of the team.
+          - value: apologise
+            text:
+              Team members quickly and genuinely apologise to one another when they say
+              or do something inappropriate or possibly damaging to the team.
+          - value: willingly_make_sacrifices
+            text:
+              Team members willingly make sacrifices (such as budget, turf, head count)
+              in their departments or areas of expertise for the good of the team.
+          - value: admit_mistakes
+            text: Team members openly admit their weaknesses and mistakes.
+          - value: compelling_meetings
+            text: Team meetings are compelling, not boring.
+          - value: leave_meetings_committed
+            text:
+              Team members leave meetings confident that their peers are completely committed
+              to the decisions that were agreed on, even if they were in initial disagreement.
+          - value: morale_affected_by_failure
+            text: Morale is significantly affected by the failure to achieve team goals.
+          - value: difficult_issues_raised
+            text:
+              During team meetings, the most important—and difficult—issues are put on
+              the table to be resolved.
+          - value: concerned_about_letting_down_peers
+            text:
+              Team members are deeply concerned about the prospect of letting down their
+              peers.
+          - value: comfortable_discussing_personal_lives
+            text:
+              Team members know about one another’s personal lives and are comfortable
+              discussing them.
+          - value: clear_resolution_discussions
+            text:
+              Team members end discussions with clear and specific resolutions and action
+              plans.
+          - value: challenge_one_another
+            text: Team members challenge one another about their plans and approaches.
+          - value: slow_to_seek_credit
+            text:
+              Team members are slow to seek credit for their own contributions, but quick
+              to point out those of others.

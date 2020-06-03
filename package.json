@@ -1,0 +1,22 @@
+{
+  "name": "team-survey",
+  "version": "1.0.0",
+  "description": "Team Survey lambda runner",
+  "dependencies": {
+    "serverless-s3-sync": "^1.14.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ONSdigital/team-survey.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ONSdigital/team-survey/issues"
+  },
+  "homepage": "https://github.com/ONSdigital/team-survey#readme"
+}
