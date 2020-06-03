@@ -18,6 +18,7 @@
             <thead>
                 <tr>
                     <th>Survey</th>
+                    <th>Open</th>
                     <th>Team</th>
                     <th># Responses</th>
                     <th>Created</th>
@@ -27,7 +28,8 @@
             <tbody>
                 {{ range $key, $survey := .Surveys }}
                 <tr>
-                    <td><a href="/{{$stage}}survey/{{$survey.SurveyID}}/" target="_blank">{{ $survey.SurveyID }}</a></td>
+                    <td>{{ if $survey.Open }}<a href="/{{$stage}}survey/{{$survey.SurveyID}}/" target="_blank">{{ $survey.SurveyID }}</a>{{ else }}{{ $survey.SurveyID }}{{ end }}</td>
+                    <td>{{ $survey.Open }}</td>
                     <td>{{ $survey.Team }}</td>
                     <td>{{ len $survey.Results }}</td>
                     <td>{{ $survey.CreatedAt.Format "02 Jan 2006 15:04:05" }}</td>
