@@ -1,0 +1,71 @@
+# COMMON ========================================
+
+aws_secret_access_key: &aws_secret_access_key ((aws.service_account_access_key_secret)) #TODO Get AWS for cake team
+aws_access_key_id: &aws_access_key_id ((aws.service_account_access_key_id)) #TODO Get AWS for cake team
+
+aws_params: &aws_params
+  AWS_ACCESS_KEY_ID: *aws_access_key_id
+  AWS_SECRET_ACCESS_KEY: *aws_secret_access_key
+  AWS_REGION: ((aws_region))
+  AWS_SERVICE_ROLE: arn:aws:iam::((aws.account_((environment)))):role/aws-svc-team-survey #TODO ci-bootstrap possibly already created part of in serverless.yml
+  S3_NAME: ((environment)).((aws.tf_state_s3)) #TODO do it for serverless
+  S3_KEY: team-survey-state/team-survey.tfstate #TODO do it for serverless
+
+github_pull_creds: &github_pull_creds
+  username: ((github.access_token))
+  password: x-oauth-basic
+
+# COMMON TASKS ==================================
+
+authenticate: &authenticate
+  task: authenticate
+  file: bpm-ci-git/tasks/authenticate/task.yml
+  params:
+    <<: *aws_params
+
+# RESOURCES =====================================
+
+resources:
+  - name: team-survey
+    type: git
+    icon: github-circle
+    source:
+      uri: https://github.com/ONSdigital/team-survey.git
+      branch: ((branch))
+      <<: *github_pull_creds
+
+  - name: bpm-ci-git
+    type: git
+    icon: github-circle
+    source:
+      uri: https://github.com/ONSdigital/bpm-ci.git
+      <<: *github_pull_creds
+
+# JOBS ==========================================
+
+jobs:
+  - name: build
+    plan:
+      - in_parallel:
+          - get: team-survey
+            trigger: true
+          - get: bpm-ci-git
+      - do:
+          - *authenticate
+          - task: serverless-apply
+            file: spp-bw-etl/ci/tasks/serverless_apply.yml
+            params:
+              <<: *tf_params #TODO Serverless params?
+
+  - name: destroy
+    plan:
+      - in_parallel:
+          - get: team-survey
+            passed: [build]
+          - get: bpm-ci-git
+      - do:
+          - *authenticate
+          - task: serverless-destroy
+            file: spp-bw-etl/ci/tasks/serverless_destroy.yml
+            params:
+              <<: *tf_params #TODO Serverless params?

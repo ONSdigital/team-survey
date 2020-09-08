@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Team Survey lambda runner",
   "dependencies": {
-    "serverless-s3-sync": "^1.14.1"
+    "serverless-s3-sync": "^1.14.4"
   },
   "devDependencies": {},
   "scripts": {

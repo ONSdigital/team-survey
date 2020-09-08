@@ -3,7 +3,7 @@ module github.com/onsdigital/team-survey
 go 1.14
 
 require (
-	github.com/aws/aws-lambda-go v1.16.0
+	github.com/aws/aws-lambda-go v1.17.0
 	github.com/aws/aws-sdk-go v1.31.2
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/google/go-cmp v0.4.1

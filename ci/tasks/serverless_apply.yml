@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: eu.gcr.io/ons-gcr-bpm/bpm-ci-tools-terraform
+    username: _json_key
+    password: ((gcp.service_account_json))
+
+inputs:
+  - name: spp-bw-etl
+  - name: role
+
+run:
+  path: spp-bw-etl/ci/tasks/terraform_apply.sh
